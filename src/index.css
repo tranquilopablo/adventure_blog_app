@@ -7,8 +7,10 @@ html {
 }
 
 body {
+  width: 100vw;
   background: #fafafa;
   margin: 0 auto;
+ overflow-x: hidden;
 }
 
 .center {
@@ -19,6 +21,6 @@ body {
 }
 
 .link {
-  text-decoration:none ;
+  text-decoration: none;
   color: inherit;
 }

@@ -18,7 +18,9 @@ const Post = ({ post }) => {
         </Link>
         <hr />
         <div className={css.postDetails}>
-          <span className={css.postDate}>{post.author}</span>
+          <Link className="link"  to={`/?uzytkownik=${post.author}`}>
+            <span className={css.postDate}>{post.author}</span>
+          </Link>
           <span className={css.postDate}>{post.postDate}</span>
         </div>
       </div>
