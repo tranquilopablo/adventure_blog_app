@@ -1,0 +1,42 @@
+/* profile picture styles  */
+.settingsPP {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.settingsPP > img {
+  height: 5vw;
+  width: 5vw;
+  border-radius: 20px;
+  object-fit: cover;
+}
+.settingsPPIcon {
+  width: 3vw;
+  height: 3vw;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50px;
+  margin-left: 10px;
+  color: white;
+  background-color: lightcoral;
+  cursor: pointer;
+  font-size: 2vw;
+}
+
+
+/* end profile picture styles */
+
+.loginInput {
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .loginInput:focus {
+    outline: none;
+  }
