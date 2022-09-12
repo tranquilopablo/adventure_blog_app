@@ -1,8 +1,15 @@
 import React from 'react';
 import css from './SinglePost.module.css';
+import Sidebar from '../components/Sidebar';
+import OnePost from '../components/OnePost';
 
 const SinglePost = () => {
-  return <div>pojedynczy post</div>;
+  return (
+    <div className={css.single}>
+      <OnePost/>
+      <Sidebar/>
+    </div>
+  )
 };
 
 export default SinglePost;
