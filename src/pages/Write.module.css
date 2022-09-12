@@ -64,5 +64,5 @@
   font-size: 1.6rem;
   cursor: pointer;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
 }

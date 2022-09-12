@@ -8,7 +8,7 @@ import Settings from './pages/Settings';
 import SinglePost from './pages/SinglePost';
 
 const App = () => {
-  const user = true;
+  const user = false;
   return (
     <Router>
       <Topbar />

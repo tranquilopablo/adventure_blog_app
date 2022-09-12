@@ -1,7 +1,6 @@
 import React from 'react';
 import css from './Post.module.css';
 import { Link } from 'react-router-dom';
-import { mapValuesSeries } from 'async';
 
 const Post = ({ post }) => {
   return (
