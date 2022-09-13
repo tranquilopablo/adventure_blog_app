@@ -4,6 +4,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const authRoute = require('./routes/auth');
 
 // app.use('/', (req, res) => {
 //   console.log('this is main url!');
@@ -35,7 +36,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   res.status(200).json('File has been uploaded');
 });
 
-// app.use('./api/auth', authRoute);
+app.use('./api/auth', authRoute);
 // app.use('./api/users', userRoute);
 // app.use('./api/posts', postRoute);
 
