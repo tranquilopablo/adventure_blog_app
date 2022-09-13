@@ -1,0 +1,33 @@
+.selectWrapper {
+  margin: 2rem;
+  margin-left: 0;
+  text-align: center;
+}
+
+.selectInputLabel {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 1vw;
+  font-size: 1.2vw;
+  letter-spacing: 0.1px;
+}
+
+option,
+select {
+  position: relative;
+  margin-left: 1.2rem;
+  width: 20vw;
+
+  color: #666;
+
+  background: transparent;
+  font-size: 1.3vw;
+  font-weight: bold;
+  padding: 2px 0px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+option {
+  background: rgb(250, 250, 250);
+}

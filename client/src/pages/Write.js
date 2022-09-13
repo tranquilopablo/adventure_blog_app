@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import css from './Write.module.css';
+import SelectCategory from '../components/SelectCategory';
 
 const Write = () => {
   const [file, setFile] = useState();
-
 
   return (
     <div className={css.write}>
@@ -33,7 +33,7 @@ const Write = () => {
             autoFocus
           />
         </div>
-
+        <SelectCategory />
         <div className={css.writeFormGroup}>
           <textarea
             className={`${css.writeInput} ${css.writeText}`}

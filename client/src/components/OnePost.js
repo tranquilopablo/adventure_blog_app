@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import css from './OnePost.module.css';
+import SelectCategory from './SelectCategory';
 
 const OnePost = () => {
+  const [editMode, setEditMode] = useState(false);
   const post = {
     image: `https://placeimg.com/640/48${Math.floor(
       Math.random() * 10
@@ -26,7 +28,10 @@ const OnePost = () => {
         <h1 className={css.onePostTitle}>
           {post.title}
           <div className={css.onePostEdit}>
-            <i className={`${css.onePostIcon} ${'far fa-edit'}`}></i>
+            <i
+              className={`${css.onePostIcon} ${'far fa-edit'}`}
+              onClick={() => setEditMode(!editMode)}
+            ></i>
             <i className={`${css.onePostIcon} ${'far fa-trash-alt'}`}></i>
           </div>
         </h1>
@@ -40,7 +45,8 @@ const OnePost = () => {
           <span>{post.postDate}</span>
         </div>
         <p className={css.onePostDesc}>{post.description}</p>
-        <button className={css.onePostButton}>Wyślij</button>
+        {editMode && <SelectCategory />}
+        {editMode && <button className={css.onePostButton}>Wyślij</button>}
       </div>
     </div>
   );
