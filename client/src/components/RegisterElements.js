@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import css from './RegisterElements.module.css';
 
-const RegisterElements = () => {
+const RegisterElements = (props) => {
   const [file, setFile] = useState();
+
+  // file && const newImgFile = URL.createObjectURL(file);
+
+  const setNewFile = (e) => {
+    setFile(e.target.files[0]);
+    props.setImageInput(URL.createObjectURL(e.target.files[0]));
+  };
 
   const defaultSrc =
     'https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500';
@@ -27,7 +34,7 @@ const RegisterElements = () => {
           type="file"
           id="fileInput"
           style={{ display: 'none' }}
-          onChange={(e) => setFile(e.target.files[0])}
+          onChange={setNewFile}
         />
       </div>
       <label>Email</label>
@@ -35,6 +42,7 @@ const RegisterElements = () => {
         type="email"
         className={css.loginInput}
         placeholder="Podaj email"
+        onChange={(e) => props.setEmailValue(e.target.value)}
       />
     </>
   );
