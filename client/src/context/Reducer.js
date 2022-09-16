@@ -1,5 +1,5 @@
 const Reducer = (state, action) => {
-  switch (action.tyme) {
+  switch (action.type) {
     case 'LOGIN START':
       return {
         user: null,

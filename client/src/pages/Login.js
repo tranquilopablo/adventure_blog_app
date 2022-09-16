@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import RegisterElements from '../components/RegisterElements';
 import css from './Login.module.css';
 import axios from 'axios';
@@ -8,9 +9,10 @@ const Login = () => {
   const [loginMode, setLoginMode] = useState(true);
   const userRef = useRef();
   const passwordRef = useRef();
-  const { dispatch, isFetching, error } = useContext(Context);
+  const { dispatch, isFetching, error, user } = useContext(Context);
   const [emailValue, setEmailValue] = useState('');
-  const [imageInput, setImageInput] = useState('');
+  const [imageInput, setImageInput] = useState(null);
+  const history = useHistory();
 
   // const isFetching = false;
 
@@ -20,35 +22,53 @@ const Login = () => {
 
     try {
       if (loginMode) {
-        //zaloguj
+        // LOGIN
 
-        console.log(userRef.current.value, passwordRef.current.value);
 
         const res = await axios.post('/auth/login', {
           username: userRef.current.value,
           password: passwordRef.current.value,
         });
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-        console.log('Zalogowano');
-      } else {
-        //zarejestruj
-        console.log(
-          userRef.current.value,
-          passwordRef.current.value,
-          emailValue,
-          imageInput
-        );
 
-        const res = await axios.post('/auth/register', {
-          username: userRef.current.value,
-          password: passwordRef.current.value,
-          email: emailValue,
-          image: imageInput,
-        });
-        dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-        console.log('zarejestrowano');
-        console.log(res.data);
-        res.data && window.location.replace('/login');
+        res.data && history.push('/');
+
+      } else {
+        // REGISTER
+
+        try {
+          const newUser = {
+            username: userRef.current.value,
+            password: passwordRef.current.value,
+            email: emailValue,
+          };
+
+          if (imageInput) {
+            const data = new FormData();
+            const fileName = Date.now() + imageInput.name;
+            data.append('name', fileName);
+            data.append('file', imageInput);
+            newUser.image = fileName;
+
+            try {
+              await axios.post('/upload', data);
+            } catch (err) {
+              console.log(err);
+            }
+          }
+          try {
+            const res = await axios.post('/auth/register', newUser);
+
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+
+
+            res.data && history.push('/');
+          } catch (err) {
+            dispatch({ type: 'LOGIN_FAILURE' });
+          }
+        } catch (err) {
+          dispatch({ type: 'LOGIN_FAILURE' });
+        }
       }
     } catch (err) {
       dispatch({ type: 'LOGIN_FAILURE' });

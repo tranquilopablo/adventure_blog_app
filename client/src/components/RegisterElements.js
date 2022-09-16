@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import css from './RegisterElements.module.css';
 
 const RegisterElements = (props) => {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
 
-  // file && const newImgFile = URL.createObjectURL(file);
-
-  const setNewFile = (e) => {
-    setFile(e.target.files[0]);
-    props.setImageInput(URL.createObjectURL(e.target.files[0]));
-  };
+  useEffect(() => {
+    props.setImageInput(file);
+  }, [file]);
 
   const defaultSrc =
-    'https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500';
+    'https://images.unsplash.com/photo-1634896941598-b6b500a502a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=456&q=80';
 
   return (
     <>
@@ -22,10 +19,6 @@ const RegisterElements = (props) => {
           src={file ? URL.createObjectURL(file) : defaultSrc}
           alt="my profile picture"
         />
-        {/* <img
-                      src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                      alt=""
-                    /> */}
         <label htmlFor="fileInput">
           <i className={`${css.settingsPPIcon} ${'far fa-user-circle'} `}></i>
         </label>
@@ -34,7 +27,7 @@ const RegisterElements = (props) => {
           type="file"
           id="fileInput"
           style={{ display: 'none' }}
-          onChange={setNewFile}
+          onChange={(e) => setFile(e.target.files[0])}
         />
       </div>
       <label>Email</label>
