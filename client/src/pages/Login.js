@@ -24,7 +24,6 @@ const Login = () => {
       if (loginMode) {
         // LOGIN
 
-
         const res = await axios.post('/auth/login', {
           username: userRef.current.value,
           password: passwordRef.current.value,
@@ -32,7 +31,6 @@ const Login = () => {
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
 
         res.data && history.push('/');
-
       } else {
         // REGISTER
 
@@ -61,7 +59,6 @@ const Login = () => {
 
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
 
-
             res.data && history.push('/');
           } catch (err) {
             dispatch({ type: 'LOGIN_FAILURE' });
@@ -74,6 +71,8 @@ const Login = () => {
       dispatch({ type: 'LOGIN_FAILURE' });
     }
   };
+
+  console.log(user);
 
   return (
     <div className={`${css.login} ${loginMode && css.register}`}>
