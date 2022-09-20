@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import css from './Write.module.css';
 import SelectCategory from '../components/SelectCategory';
+import { Context } from '../context/Context';
 
 const Write = () => {
   const [file, setFile] = useState();
+  const { user } = useContext(Context);
 
   return (
     <div className={css.write}>
