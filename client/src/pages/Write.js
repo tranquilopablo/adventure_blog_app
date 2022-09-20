@@ -1,11 +1,23 @@
 import React, { useContext, useState } from 'react';
-import css from './Write.module.css';
 import SelectCategory from '../components/SelectCategory';
 import { Context } from '../context/Context';
+import axios from 'axios';
+import css from './Write.module.css';
+
 
 const Write = () => {
   const [file, setFile] = useState();
   const { user } = useContext(Context);
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+
+
+
+  const handleSubmit = (e) => {
+    e.preventSefault()
+
+
+  }
 
   return (
     <div className={css.write}>
@@ -17,7 +29,7 @@ const Write = () => {
           className={css.writeImg}
         />
       )}
-      <form action="" className={css.writeForm}>
+      <form action="" className={css.writeForm} onSubmit={handleSubmit} >
         <div className={css.writeFormGroup}>
           <label htmlFor="fileInput">
             <i className={`${css.fileIcon} ${'fas fa-plus'}`}></i>
