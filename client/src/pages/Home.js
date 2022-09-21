@@ -37,6 +37,11 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
 
+  const sortedPosts = posts.sort(
+    (a, b) => b.photo.slice(0, 12) - a.photo.slice(0, 12)
+  );
+  console.log(sortedPosts);
+
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await axios.get('/posts' + search);
@@ -49,7 +54,7 @@ const Home = () => {
     <>
       <Header />
       <div className={css.home}>
-        <Posts posts={posts} />
+        <Posts posts={sortedPosts} />
         <Sidebar />
       </div>
     </>
