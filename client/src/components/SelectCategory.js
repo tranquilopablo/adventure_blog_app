@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import css from './SelectCategory.module.css';
 
-const SelectCategory = () => {
-  const [category, setCategory] = useState('Europa');
+const SelectCategory = (props) => {
+  // const [category, setCategory] = useState('Europa');
 
   const categories = [
     'Azja',
@@ -16,7 +16,7 @@ const SelectCategory = () => {
   return (
     <div className={css.selectWrapper}>
       <label className={css.selectInputLabel}>Wybierz kategorię:</label>
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select value={props.value} onChange={(e) => props.cat(e.target.value)}>
         {categories.map((category) => (
           <option className={css.option} key={category} value={category}>
             {category}

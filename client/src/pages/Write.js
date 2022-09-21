@@ -3,33 +3,59 @@ import SelectCategory from '../components/SelectCategory';
 import { Context } from '../context/Context';
 import axios from 'axios';
 import css from './Write.module.css';
-
+import { useHistory } from 'react-router-dom';
 
 const Write = () => {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const { user } = useContext(Context);
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('Europa');
+  const history = useHistory();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPost = {
+      username: user.username,
+      title,
+      description,
+      category,
+      postDate: new Date().toLocaleDateString(),
+    };
 
+    if (file) {
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append('name', filename);
+      data.append('file', file);
+      newPost.photo = filename;
+      try {
+        await axios.post('/upload', data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
-  const handleSubmit = (e) => {
-    e.preventSefault()
+    try {
+      const res = await axios.post('/posts', newPost);
 
-
-  }
+      history.push('/post/' + res.data._id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={css.write}>
       {file && (
         <img
-          //   src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          // src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           src={URL.createObjectURL(file)}
           alt=""
           className={css.writeImg}
         />
       )}
-      <form action="" className={css.writeForm} onSubmit={handleSubmit} >
+      <form action="" className={css.writeForm} onSubmit={handleSubmit}>
         <div className={css.writeFormGroup}>
           <label htmlFor="fileInput">
             <i className={`${css.fileIcon} ${'fas fa-plus'}`}></i>
@@ -45,14 +71,16 @@ const Write = () => {
             placeholder="Tytuł"
             className={css.writeInput}
             autoFocus
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <SelectCategory />
+        <SelectCategory value={category} cat={setCategory} />
         <div className={css.writeFormGroup}>
           <textarea
             className={`${css.writeInput} ${css.writeText}`}
             type="text"
             placeholder="Napisz post..."
+            onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
         <button className={css.writeSubmit} type="submit">

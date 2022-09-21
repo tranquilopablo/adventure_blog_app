@@ -3,11 +3,17 @@ import css from './Post.module.css';
 import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
+  const picturePath = 'http://localhost:5000/images/';
+
   return (
     <div className={css.post}>
-      {post.image && (
+      {post.photo && (
         <Link className="link" to={`/post/${post._id}`}>
-          <img src={post.image} alt={post.title} className={css.postImg} />
+          <img
+            src={picturePath + post.photo}
+            alt={post.title}
+            className={css.postImg}
+          />
         </Link>
       )}
       <div className={css.postInfo}>
@@ -17,7 +23,7 @@ const Post = ({ post }) => {
         </Link>
         <hr />
         <div className={css.postDetails}>
-          <Link className="link"  to={`/?uzytkownik=${post.username}`}>
+          <Link className="link" to={`/?uzytkownik=${post.username}`}>
             <span className={css.postDate}>{post.username}</span>
           </Link>
           <span className={css.postDate}>{post.postDate}</span>

@@ -1,5 +1,6 @@
 .onePost {
   flex: 9;
+  overflow-x: hidden;
 }
 
 .onePostWrapper {
@@ -56,6 +57,7 @@
 }
 
 .onePostDesc {
+  max-width: 96%;
   color: #666;
   font-size: 1.8rem;
   line-height: 25px;

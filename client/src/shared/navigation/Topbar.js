@@ -5,8 +5,8 @@ import { Context } from '../../context/Context';
 
 const Topbar = () => {
   const { user, dispatch } = useContext(Context);
+  const picturePath = 'http://localhost:5000/images/';
   // const user = true;
-  console.log(user);
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -34,7 +34,8 @@ const Topbar = () => {
             <Link to="/ustawienia">
               <img
                 className={css.avatar}
-                src="https://images.unsplash.com/photo-1514929781313-76fcbb2136b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
+                src={picturePath + user.profilePic}
+                // src="https://images.unsplash.com/photo-1514929781313-76fcbb2136b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
                 alt=""
               />
             </Link>

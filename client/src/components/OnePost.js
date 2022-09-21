@@ -11,6 +11,8 @@ const OnePost = () => {
   const [post, setPost] = useState({});
 
   const path = location.pathname.split('/')[2];
+  const picturePath = 'http://localhost:5000/images/';
+
 
   useEffect(() => {
     const getPost = async () => {
@@ -37,7 +39,7 @@ const OnePost = () => {
     <div className={css.onePost}>
       <div className={css.onePostWrapper}>
         {post.photo && (
-          <img className={css.onePostImg} src={post.photo} alt="" />
+          <img className={css.onePostImg} src={picturePath + post.photo} alt="" />
         )}
 
         <h1 className={css.onePostTitle}>
