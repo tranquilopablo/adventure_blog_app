@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
-
+     
     console.log(savedPost);
 
     res.status(200).json(savedPost);
@@ -30,7 +30,7 @@ router.put('/:id', async (req, res) => {
           {
             $set: req.body,
           },
-          { new: true }
+          { new: true }            // new: true - returns document after update was applied
         );
         res.status(200).json(updatedPost);
       } catch (err) {

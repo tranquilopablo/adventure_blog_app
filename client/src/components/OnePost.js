@@ -10,7 +10,11 @@ const OnePost = () => {
   const [editMode, setEditMode] = useState(false);
   const location = useLocation();
   const [post, setPost] = useState({});
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
   const { user } = useContext(Context);
+  const [category, setCategory] = useState('');
+  const history = useHistory();
 
   const path = location.pathname.split('/')[2];
   const picturePath = 'http://localhost:5000/images/';
@@ -19,6 +23,9 @@ const OnePost = () => {
     const getPost = async () => {
       const res = await axios.get('/posts/' + path);
       setPost(res.data);
+      setTitle(res.data.title);
+      setDescription(res.data.description);
+      setCategory(res.data.category);
     };
     getPost();
   }, [path]);
@@ -36,16 +43,38 @@ const OnePost = () => {
   //   category: 'Azja',
   // };
 
-  const handleDelete = () => {
-    console.log('usunieto');
-    
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete('/posts/' + path, {
+        data: {
+          username: user.username,
+        },
+      });
+      history.push('/');
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
-  const handleEditedPost = (e) => {
-   e.preventDefault();
-   console.log('edytowane');
-   
-    
+  const handleEditedPost = async (e) => {
+    console.log('edytowane');
+    try {
+      const res = await axios.put('/posts/' + path, {
+        username: user.username,
+        title,
+        description,
+        category,
+      });
+
+      (() => {
+        if (res.data) {
+          setEditMode(false);
+          history.push('/');
+        }
+      })();
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -58,22 +87,32 @@ const OnePost = () => {
             alt=""
           />
         )}
+        {editMode ? (
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            autoFocus
+            className={css.onePostTitleInput}
+          />
+        ) : (
+          <h1 className={css.onePostTitle}>
+            {post.title}
+            {post.username === user?.username && (
+              <div className={css.onePostEdit}>
+                <i
+                  className={`${css.onePostIcon} ${'far fa-edit'}`}
+                  onClick={() => setEditMode(!editMode)}
+                ></i>
+                <i
+                  className={`${css.onePostIcon} ${'far fa-trash-alt'}`}
+                  onClick={handleDelete}
+                ></i>
+              </div>
+            )}
+          </h1>
+        )}
 
-        <h1 className={css.onePostTitle}>
-          {post.title}
-          {post.username === user?.username && (
-            <div className={css.onePostEdit}>
-              <i
-                className={`${css.onePostIcon} ${'far fa-edit'}`}
-                onClick={() => setEditMode(!editMode)}
-              ></i>
-              <i
-                className={`${css.onePostIcon} ${'far fa-trash-alt'}`}
-                onClick={handleDelete}
-              ></i>
-            </div>
-          )}
-        </h1>
         <div className={css.onePostInfo}>
           <span className={css.onePostAuthor}>
             Autor:
@@ -83,9 +122,22 @@ const OnePost = () => {
           </span>
           <span>{post.postDate}</span>
         </div>
-        <p className={css.onePostDesc}>{post.description}</p>
-        {editMode && <SelectCategory />}
-        {editMode && <button className={css.onePostButton}  onClick={handleEditedPost} >Wyślij</button>}
+        {editMode ? (
+          <textarea
+            rows="15"
+            className={css.onePostDescInput}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        ) : (
+          <p className={css.onePostDesc}>{post.description}</p>
+        )}
+        {editMode && <SelectCategory value={category} cat={setCategory} />}
+        {editMode && (
+          <button className={css.onePostButton} onClick={handleEditedPost}>
+            Wyślij
+          </button>
+        )}
       </div>
     </div>
   );
