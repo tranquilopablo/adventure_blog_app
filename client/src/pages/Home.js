@@ -40,7 +40,6 @@ const Home = () => {
   const sortedPosts = posts.sort(
     (a, b) => b.photo.slice(0, 12) - a.photo.slice(0, 12)
   );
-  console.log(sortedPosts);
 
   useEffect(() => {
     const fetchPosts = async () => {

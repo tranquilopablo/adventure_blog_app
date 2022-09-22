@@ -9,7 +9,7 @@ const Login = () => {
   const [loginMode, setLoginMode] = useState(true);
   const userRef = useRef();
   const passwordRef = useRef();
-  const { dispatch, isFetching, error, user } = useContext(Context);
+  const { dispatch, isFetching, error } = useContext(Context);
   const [emailValue, setEmailValue] = useState('');
   const [imageInput, setImageInput] = useState(null);
   const history = useHistory();
@@ -20,10 +20,10 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: 'LOGIN_START' });
 
-    try {
-      if (loginMode) {
-        // LOGIN
-        
+    if (loginMode) {
+      // LOGIN
+
+      try {
         console.log(userRef.current.value);
         console.log(passwordRef.current.value);
         const res = await axios.post('/auth/login', {
@@ -31,53 +31,52 @@ const Login = () => {
           password: passwordRef.current.value,
         });
 
-        console.log(res.data);
-
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+        console.log('dziala');
 
         res.data && history.push('/');
-      } else {
-        // REGISTER
+      } catch (err) {
+        dispatch({ type: 'LOGIN_FAILURE' });
+        console.log(err);
+        console.log('erroorrr');
+      }
+    } else {
+      // REGISTER
 
-        try {
-          const newUser = {
-            username: userRef.current.value,
-            password: passwordRef.current.value,
-            email: emailValue,
-          };
+      try {
+        const newUser = {
+          username: userRef.current.value,
+          password: passwordRef.current.value,
+          email: emailValue,
+        };
 
-          if (imageInput) {
-            const data = new FormData();
-            const fileName = Date.now() + imageInput.name;
-            data.append('name', fileName);
-            data.append('file', imageInput);
-            newUser.image = fileName;
+        if (imageInput) {
+          const data = new FormData();
+          const fileName = Date.now() + imageInput.name;
+          data.append('name', fileName);
+          data.append('file', imageInput);
+          newUser.image = fileName;
 
-            try {
-              await axios.post('/upload', data);
-            } catch (err) {
-              console.log(err);
-            }
-          }
           try {
-            const res = await axios.post('/auth/register', newUser);
-
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-
-            res.data && history.push('/');
+            await axios.post('/upload', data);
           } catch (err) {
-            dispatch({ type: 'LOGIN_FAILURE' });
+            console.log(err);
           }
+        }
+        try {
+          const res = await axios.post('/auth/register', newUser);
+
+          dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+
+          res.data && history.push('/');
         } catch (err) {
           dispatch({ type: 'LOGIN_FAILURE' });
         }
+      } catch (err) {
+        dispatch({ type: 'LOGIN_FAILURE' });
       }
-    } catch (err) {
-      dispatch({ type: 'LOGIN_FAILURE' });
     }
   };
-
-  console.log(user);
 
   return (
     <div className={`${css.login} ${loginMode && css.register}`}>

@@ -11,7 +11,6 @@ const postRoute = require('./routes/posts');
 // app.use('/', (req, res) => {
 //   console.log('this is main url!');
 // });
-dotenv.config();
 app.use(express.json()); //  app to be able send json file in body, for example via postman. This is mainly for POST and PUT request. For GET, and DELETE dont need.
 
 app.use('/images', express.static(path.join(__dirname, '/images')));
@@ -38,6 +37,8 @@ const upload = multer({ storage: storage });
 app.post('/api/upload', upload.single('file'), (req, res) => {
   res.status(200).json('File has been uploaded');
 });
+
+
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);

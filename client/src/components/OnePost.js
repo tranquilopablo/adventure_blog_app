@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import css from './OnePost.module.css';
 import SelectCategory from './SelectCategory';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { Context } from '../context/Context';
 
 const OnePost = () => {
   const [editMode, setEditMode] = useState(false);
   const location = useLocation();
   const [post, setPost] = useState({});
+  const { user } = useContext(Context);
 
   const path = location.pathname.split('/')[2];
   const picturePath = 'http://localhost:5000/images/';
-
 
   useEffect(() => {
     const getPost = async () => {
@@ -35,22 +36,43 @@ const OnePost = () => {
   //   category: 'Azja',
   // };
 
+  const handleDelete = () => {
+    console.log('usunieto');
+    
+  };
+
+  const handleEditedPost = (e) => {
+   e.preventDefault();
+   console.log('edytowane');
+   
+    
+  };
+
   return (
     <div className={css.onePost}>
       <div className={css.onePostWrapper}>
         {post.photo && (
-          <img className={css.onePostImg} src={picturePath + post.photo} alt="" />
+          <img
+            className={css.onePostImg}
+            src={picturePath + post.photo}
+            alt=""
+          />
         )}
 
         <h1 className={css.onePostTitle}>
           {post.title}
-          <div className={css.onePostEdit}>
-            <i
-              className={`${css.onePostIcon} ${'far fa-edit'}`}
-              onClick={() => setEditMode(!editMode)}
-            ></i>
-            <i className={`${css.onePostIcon} ${'far fa-trash-alt'}`}></i>
-          </div>
+          {post.username === user?.username && (
+            <div className={css.onePostEdit}>
+              <i
+                className={`${css.onePostIcon} ${'far fa-edit'}`}
+                onClick={() => setEditMode(!editMode)}
+              ></i>
+              <i
+                className={`${css.onePostIcon} ${'far fa-trash-alt'}`}
+                onClick={handleDelete}
+              ></i>
+            </div>
+          )}
         </h1>
         <div className={css.onePostInfo}>
           <span className={css.onePostAuthor}>
@@ -63,7 +85,7 @@ const OnePost = () => {
         </div>
         <p className={css.onePostDesc}>{post.description}</p>
         {editMode && <SelectCategory />}
-        {editMode && <button className={css.onePostButton}>Wyślij</button>}
+        {editMode && <button className={css.onePostButton}  onClick={handleEditedPost} >Wyślij</button>}
       </div>
     </div>
   );
