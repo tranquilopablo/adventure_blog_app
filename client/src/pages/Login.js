@@ -32,13 +32,11 @@ const Login = () => {
         });
 
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-        console.log('dziala');
 
         res.data && history.push('/');
       } catch (err) {
         dispatch({ type: 'LOGIN_FAILURE' });
         console.log(err);
-        console.log('erroorrr');
       }
     } else {
       // REGISTER

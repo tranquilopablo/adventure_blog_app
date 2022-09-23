@@ -12,6 +12,8 @@ const Settings = () => {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
 
+  const picturePath = 'http://localhost:5000/images/';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // dispatch({ type: 'UPDATE_START' });
@@ -47,20 +49,32 @@ const Settings = () => {
     // }
   };
 
-  const defaultSrc =
-    'https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500';
+  const handleDeleteAccount = () => {
+    console.log('usunales konto!');
+  };
+
+  // const defaultSrc =
+  //   'https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500';
+
   return (
     <div className={css.settings}>
       <div className={css.settingsWrapper}>
         <div className={css.settingsTitle}>
           <span className={css.settingsTitleUpdate}>Edytuj swoje konto</span>
-          <span className={css.settingsTitleDelete}>Usuń konto</span>
+          <span
+            className={css.settingsTitleDelete}
+            onClick={handleDeleteAccount}
+          >
+            Usuń konto
+          </span>
         </div>
         <form className={css.settingsForm} onSubmit={handleSubmit}>
           <label>Zdjęcie profilowe</label>
           <div className={css.settingsPP}>
             <img
-              src={file ? URL.createObjectURL(file) : defaultSrc}
+              src={
+                file ? URL.createObjectURL(file) : picturePath + user.profilePic
+              }
               alt="my profile picture"
             />
             {/* <img
@@ -104,16 +118,18 @@ const Settings = () => {
           <button className={css.settingsSubmitButton} type="submit">
             Zaktualizuj
           </button>
-          <span
-            style={{
-              color: 'green',
-              textAlign: 'center',
-              marginTop: '20px',
-              fontSize: '1.3rem',
-            }}
-          >
-            Profil został zaktualizowany
-          </span>
+          {success && (
+            <span
+              style={{
+                color: 'green',
+                textAlign: 'center',
+                marginTop: '20px',
+                fontSize: '1.3rem',
+              }}
+            >
+              Profil został zaktualizowany
+            </span>
+          )}
         </form>
       </div>
       <Sidebar />
