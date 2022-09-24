@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useSyncExternalStore } from 'react';
 import css from './Settings.module.css';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
@@ -7,8 +7,8 @@ import { Context } from '../context/Context';
 const Settings = () => {
   const [file, setFile] = useState(null);
   const { user, dispatch } = useContext(Context);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -31,26 +31,35 @@ const Settings = () => {
       data.append('file', file);
       updatedUser.profilePic = filename;
 
-      // try {
-      //   await axios.post('/upload', data);
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        await axios.post('/upload', data);
+      } catch (err) {
+        console.log(err);
+      }
     }
-    console.log(updatedUser);
 
-    // try {
-    //   const res = await axios.put('/users/' + user._id, updatedUser);
-    //   setSuccess(true);
-    //   dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
-    // } catch (err) {
-    //   dispatch({ type: 'UPDATE_FAILURE' });
-    //   console.log(err);
-    // }
+    try {
+      const res = await axios.put('/users/' + user._id, updatedUser);
+      setSuccess(true);
+      console.log(res.data);
+
+      dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
+    } catch (err) {
+      dispatch({ type: 'UPDATE_FAILURE' });
+      console.log(err);
+    }
   };
 
-  const handleDeleteAccount = () => {
-    console.log('usunales konto!');
+  const handleDeleteAccount = async () => {
+    try {
+      const res = await axios.delete('/users/' + user._id, {
+        data: { userId: user._id },
+      });
+      console.log(res.data);
+      console.log('usunales konto!');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // const defaultSrc =
