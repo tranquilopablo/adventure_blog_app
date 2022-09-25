@@ -13,7 +13,7 @@ const Login = () => {
   const [emailValue, setEmailValue] = useState('');
   const [imageInput, setImageInput] = useState(null);
   const history = useHistory();
-  const [err, setErr] = useState(error);
+  const [err, setErr] = useState(false);
 
   // const isFetching = false;
 
@@ -36,9 +36,9 @@ const Login = () => {
 
         res.data && history.push('/');
       } catch (err) {
+        setErr(true);
         dispatch({ type: 'LOGIN_FAILURE' });
         console.log(err);
-        setErr(error);
       }
     } else {
       // REGISTER
@@ -80,6 +80,11 @@ const Login = () => {
     }
   };
 
+  const modeSwitch = () => {
+    setLoginMode(!loginMode);
+    setErr(false);
+  };
+
   return (
     <div className={`${css.login} ${loginMode && css.register}`}>
       <span className={css.loginTitle}>
@@ -111,10 +116,7 @@ const Login = () => {
           {!loginMode ? 'Zarejestruj' : 'Zaloguj'}
         </button>
       </form>
-      <button
-        onClick={() => setLoginMode(!loginMode)}
-        className={css.loginRegisterButton}
-      >
+      <button onClick={modeSwitch} className={css.loginRegisterButton}>
         {loginMode ? 'Rejestracja' : 'Logowanie'}
       </button>
       {err && (
