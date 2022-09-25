@@ -13,6 +13,7 @@ const Login = () => {
   const [emailValue, setEmailValue] = useState('');
   const [imageInput, setImageInput] = useState(null);
   const history = useHistory();
+  const [err, setErr] = useState(error);
 
   // const isFetching = false;
 
@@ -37,6 +38,7 @@ const Login = () => {
       } catch (err) {
         dispatch({ type: 'LOGIN_FAILURE' });
         console.log(err);
+        setErr(error);
       }
     } else {
       // REGISTER
@@ -69,9 +71,11 @@ const Login = () => {
           res.data && history.push('/');
         } catch (err) {
           dispatch({ type: 'LOGIN_FAILURE' });
+          setErr(error);
         }
       } catch (err) {
         dispatch({ type: 'LOGIN_FAILURE' });
+        setErr(error);
       }
     }
   };
@@ -113,7 +117,7 @@ const Login = () => {
       >
         {loginMode ? 'Rejestracja' : 'Logowanie'}
       </button>
-      {error && (
+      {err && (
         <span style={{ color: 'red', marginTop: '15px', fontSize: '1.4rem' }}>
           Coś poszło nie tak! Sprawdż poprawność danych.
         </span>
