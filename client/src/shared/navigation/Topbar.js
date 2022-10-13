@@ -19,9 +19,7 @@ const Topbar = () => {
       document.body.style.overflow = 'visible';
     }
   };
-  const closeSideMenu = () => {
-    setOpen((prevState) => !prevState);
-  };
+ 
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
 import css from './MobileNav.module.css';
@@ -7,13 +7,6 @@ const MobileNav = (props) => {
   const { user, dispatch } = useContext(Context);
   const picturePath = 'http://localhost:5000/images/';
 
-  //   const openSideMenu = () => {
-  //     //   setSideMenuIsOpen(true);
-  //   };
-  //   const closeSideMenu = () => {
-  //     //   setSideMenuIsOpen(false);
-
-  //   };
 
   const logout = ()=> {
     props.closeSideMenu()
@@ -47,6 +40,7 @@ const MobileNav = (props) => {
                 <img
                   className={css.avatar}
                   src={picturePath + user.profilePic}
+                  alt="my avatar"
                 />
               </Link>
             </div>

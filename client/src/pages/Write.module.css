@@ -1,5 +1,6 @@
 .write {
   padding-top: 6vw;
+  overflow-x: hidden;
 }
 
 .writeImg {
@@ -46,6 +47,7 @@
 
 .writeText {
   width: 70vw;
+  max-width: 70vw;
   height: 100vh;
   font-family: inherit;
   font-size: 2rem;
@@ -66,4 +68,66 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+}
+@media (max-width: 1270px) {
+  .writeSubmit {
+    top: 18vw;
+    right: 90px;
+  }
+}
+@media (max-width: 1060px) {
+  .writeSubmit {
+    top: 6vw;
+    right: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .write {
+    width: 92vw;
+    margin: 6vw auto 0 auto;
+  }
+
+  .writeImg {
+    margin-left: 0;
+    width: 92vw;
+    height: 50vw;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .writeFormGroup {
+    margin-left: 0;
+  }
+
+  .writeInput {
+    font-size: 2.2rem;
+    margin-top: 0;
+    padding: 10px;
+    width: 92vw;
+  }
+
+  .writeSubmit {
+    top: 38vw;
+    right: 10vw;
+    padding: 10px;
+    font-size: 1.4rem;
+    letter-spacing: 0.7px;
+  }
+  .fileIcon {
+    width: 12vw;
+    height: 12vw;
+  }
+  .writeText {  
+    margin-top: 24vw;
+    max-width: none;
+
+  }
+}
+
+@media (max-width: 600px) {
+  .writeText {  
+    font-size: 1.6rem;
+    line-height: 120%;
+  }
 }

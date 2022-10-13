@@ -27,16 +27,40 @@
   font-size: 2vw;
 }
 
-
 /* end profile picture styles */
 
 .loginInput {
-    padding: 10px;
-    background-color: white;
-    border: none;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.loginInput:focus {
+  outline: none;
+}
+
+@media (max-width: 1020px) {
+  .settingsPPIcon {
+    width: 6vw;
+    height: 6vw;
+    font-size: 4vw;
+  }
+  .settingsPP > img {
+    height: 7vw;
+    width: 7vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .settingsPPIcon {
+    width: 9vw;
+    height: 9vw;
+    font-size: 6vw;
+  }
+  .settingsPP > img {
+    height: 12vw;
+    width: 12vw;
     border-radius: 10px;
   }
-  
-  .loginInput:focus {
-    outline: none;
-  }
+}
