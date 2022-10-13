@@ -3,10 +3,11 @@ import css from './RegisterElements.module.css';
 
 const RegisterElements = (props) => {
   const [file, setFile] = useState(null);
+ const setImageInput = props.setImageInput
 
   useEffect(() => {
-    props.setImageInput(file);
-  }, [file]);
+    setImageInput(file);
+  }, [file, setImageInput]);
 
   const defaultSrc =
     'https://images.unsplash.com/photo-1634896941598-b6b500a502a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=456&q=80';

@@ -1,8 +1,9 @@
-import React, { useContext, useState, useSyncExternalStore } from 'react';
+import React, { useContext, useState} from 'react';
 import css from './Settings.module.css';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
 import { Context } from '../context/Context';
+import Modal from '../shared/uiElements/Modal';
 
 const Settings = () => {
   const [file, setFile] = useState(null);
@@ -11,8 +12,13 @@ const Settings = () => {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const picturePath = 'http://localhost:5000/images/';
+
+  const openConfirmationDialog = () => {
+    setIsOpenModal(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,11 +61,17 @@ const Settings = () => {
       const res = await axios.delete('/users/' + user._id, {
         data: { userId: user._id },
       });
+      if (res.data) {
+        setTimeout(() => {
+          dispatch({ type: 'LOGOUT' });
+        }, 500);
+      }
       console.log(res.data);
       console.log('usunales konto!');
     } catch (err) {
       console.log(err);
     }
+    setIsOpenModal(false);
   };
 
   // const defaultSrc =
@@ -67,12 +79,20 @@ const Settings = () => {
 
   return (
     <div className={css.settings}>
+      {isOpenModal && (
+        <Modal
+          setIsOpen={setIsOpenModal}
+          title="Potwierdź"
+          content="Potwierdzasz chęć usunięcia konta?"
+          confirm={handleDeleteAccount}
+        />
+      )}
       <div className={css.settingsWrapper}>
         <div className={css.settingsTitle}>
           <span className={css.settingsTitleUpdate}>Edytuj swoje konto</span>
           <span
             className={css.settingsTitleDelete}
-            onClick={handleDeleteAccount}
+            onClick={openConfirmationDialog}
           >
             Usuń konto
           </span>
@@ -84,7 +104,7 @@ const Settings = () => {
               src={
                 file ? URL.createObjectURL(file) : picturePath + user.profilePic
               }
-              alt="my profile picture"
+              alt="me"
             />
             {/* <img
               src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"

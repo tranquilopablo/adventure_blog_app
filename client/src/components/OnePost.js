@@ -5,6 +5,7 @@ import SelectCategory from './SelectCategory';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
+import Modal from '../shared/uiElements/Modal';
 
 const OnePost = () => {
   const [editMode, setEditMode] = useState(false);
@@ -15,6 +16,7 @@ const OnePost = () => {
   const { user } = useContext(Context);
   const [category, setCategory] = useState('');
   const history = useHistory();
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const path = location.pathname.split('/')[2];
   const picturePath = 'http://localhost:5000/images/';
@@ -45,7 +47,7 @@ const OnePost = () => {
 
   const handleDelete = async () => {
     try {
-      const res = await axios.delete('/posts/' + path, {
+      await axios.delete('/posts/' + path, {
         data: {
           username: user.username,
         },
@@ -79,6 +81,14 @@ const OnePost = () => {
 
   return (
     <div className={css.onePost}>
+      {isOpenModal && (
+        <Modal
+          setIsOpen={setIsOpenModal}
+          title="Potwierdź"
+          content="Potwierdzasz chęć usunięcia posta?"
+          confirm={handleDelete}
+        />
+      )}{' '}
       <div className={css.onePostWrapper}>
         {post.photo && (
           <img
@@ -106,7 +116,7 @@ const OnePost = () => {
                 ></i>
                 <i
                   className={`${css.onePostIcon} ${'far fa-trash-alt'}`}
-                  onClick={handleDelete}
+                  onClick={() => setIsOpenModal(true)}
                 ></i>
               </div>
             )}
