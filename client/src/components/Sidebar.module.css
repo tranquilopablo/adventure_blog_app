@@ -64,3 +64,8 @@
   font-family: 'Varela Round', Arial, Helvetica, sans-serif;
   color: #633f06;
 }
+@media (max-width: 768px) {
+  .noDisplay {
+    display: none;
+  }
+}

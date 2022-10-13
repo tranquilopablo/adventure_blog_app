@@ -12,9 +12,9 @@ const categories = [
   'Antarktyda',
 ];
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
-    <div className={css.sidebar}>
+    <div className={`${css.sidebar} ${props.extrastyles && css.noDisplay}`}>
       <div className={css.sidebarItem}>
         <span className={css.sidebarTitle}>ŚWIAT</span>
         <img

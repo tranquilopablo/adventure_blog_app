@@ -40,7 +40,7 @@
   padding: 10px;
   color: #2c3e50;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -127,4 +127,35 @@
   transform: none;
   background: #e9a7a7;
 }
+@media (max-width: 1300px) {
+  .modalContent p{
+    font-size: 1.6vw;
 
+}
+}
+@media (max-width: 1020px) {
+  .modal {
+    width: 50vw;
+    height: 20vw;
+  }
+  .modalContent p{
+    font-size: 2.6vw;
+
+}
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 90vw;
+    height: 50vw;
+  }
+  .heading{
+    font-size: 18px;
+
+  }
+  .modalContent p{
+    font-size: 5vw;
+
+}
+
+}

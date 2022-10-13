@@ -25,7 +25,7 @@
 
 .settingsTitleDelete {
   color: red;
-  font-size: 1.5rem;
+  font-size: 2rem;
   cursor: pointer;
   padding: 4px;
   font-weight: 600;
@@ -94,4 +94,34 @@
 
 .settingsSubmitButton:hover {
   background-color: rgb(1, 114, 114);
+}
+
+@media (max-width: 768px) {
+  .settingsTitle{
+    display: flex;
+    flex-direction: column;
+  }
+  .settingsTitleUpdate {
+    font-size: 2rem;
+  }
+
+  .settingsTitleDelete{
+       align-self: flex-end;
+    font-size: 1.5rem;
+
+  }
+
+ 
+  
+  .settingsPP > img {
+    height: 12vw;
+    width: 12vw;
+    border-radius: 10px;
+  }
+  .settingsPPIcon {
+    width: 8vw;
+    height: 8vw; 
+    margin-left: 12px;
+    font-size: 5vw;
+  }
 }

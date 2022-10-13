@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import css from './Settings.module.css';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
@@ -161,7 +161,7 @@ const Settings = () => {
           )}
         </form>
       </div>
-      <Sidebar />
+      <Sidebar extrastyles/>
     </div>
   );
 };
