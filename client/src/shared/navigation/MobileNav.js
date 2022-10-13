@@ -1,0 +1,72 @@
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Context } from '../../context/Context';
+import css from './MobileNav.module.css';
+
+const MobileNav = (props) => {
+  const { user, dispatch } = useContext(Context);
+  const picturePath = 'http://localhost:5000/images/';
+
+  //   const openSideMenu = () => {
+  //     //   setSideMenuIsOpen(true);
+  //   };
+  //   const closeSideMenu = () => {
+  //     //   setSideMenuIsOpen(false);
+
+  //   };
+
+  const logout = ()=> {
+    props.closeSideMenu()
+    dispatch({ type: 'LOGOUT' });
+
+  }
+
+  
+
+  return (
+    <React.Fragment>
+      <div className={css.backdrop}></div>
+      <div className={css.topbar}>
+        <ul className={css['list-wrapper']}>
+          <li className={css['list-item']}>
+            <Link className="link" to="/" onClick={props.closeSideMenu}>
+              STRONA GŁÓWNA
+            </Link>
+          </li>
+          {user && (
+            <li className={css['list-item']}>
+              <Link className="link" to="/napisz" onClick={props.closeSideMenu}>
+                NAPISZ
+              </Link>
+            </li>
+          )}
+
+          {user && (
+            <div className={`${css['img-box']}`}>
+              <Link to="/ustawienia" onClick={props.closeSideMenu}>
+                <img
+                  className={css.avatar}
+                  src={picturePath + user.profilePic}
+                />
+              </Link>
+            </div>
+          )}
+
+          {user ? (
+            <p className={css.login} onClick={logout}>
+              WYLOGUJ
+            </p>
+          ) : (
+            <p className={css.login}>
+              <Link className="link" to="/login" onClick={props.closeSideMenu}>
+                LOGIN
+              </Link>
+            </p>
+          )}
+        </ul>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default MobileNav;

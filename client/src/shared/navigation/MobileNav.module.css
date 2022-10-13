@@ -1,0 +1,58 @@
+@media (max-width: 768px) {
+ 
+  .backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: rgba(102, 73, 73, 0.4);
+    z-index: 10;
+  }
+  .topbar {
+    position: fixed;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    font-family: 'Josefin Sans';
+    width: 100vw;
+    height: 100%;
+    background-color: rgb(124, 98, 241);
+   
+  }
+
+  .list-wrapper {
+    list-style: none;
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+    gap: 3rem;
+   
+  }
+  .list-item {
+    cursor: pointer;
+  }
+  .list-item:hover {
+    color: rgb(55, 110, 60);
+  }
+
+  .avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .login {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .login:hover {
+    color: rgb(55, 110, 60);
+  }
+}

@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 .list-item:hover {
- color: rgb(55, 110, 60);
+  color: rgb(55, 110, 60);
 }
 
 .right {
@@ -51,4 +51,22 @@
 }
 .login:hover {
   color: rgb(55, 110, 60);
- }
+}
+
+.hamburger {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-left: 70vw;
+  z-index: 200;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .list-wrapper,
+  .right {
+    display: none;
+  }
+}
