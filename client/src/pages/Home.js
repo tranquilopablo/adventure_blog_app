@@ -53,8 +53,8 @@ const Home = () => {
     <>
       <Header />
       <div className={css.home}>
-        <Posts posts={sortedPosts} />
-        <Sidebar />
+        <Posts posts={sortedPosts}  />
+        <Sidebar extraStylesHome/>
       </div>
     </>
   );

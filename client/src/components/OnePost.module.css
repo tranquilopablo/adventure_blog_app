@@ -108,3 +108,16 @@
 .onePostDescInput:focus {
   outline: none;
 }
+
+@media (max-width: 768px) {
+  .onePostWrapper {
+    padding: 0;
+  }
+  .onePostImg {
+    height: 60vw;
+  }
+
+  .onePostTitle {
+    margin: 22px;
+  }
+}

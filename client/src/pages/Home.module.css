@@ -2,3 +2,9 @@
   display: flex;
   margin-top: 4vw;
 }
+
+@media (max-width: 768px) {
+  .home {
+    flex-direction:column-reverse ;
+  }
+}

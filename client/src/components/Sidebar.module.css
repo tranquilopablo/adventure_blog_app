@@ -68,4 +68,19 @@
   .noDisplay {
     display: none;
   }
+  .extraStylesHomeSidebar {
+    position: relative;
+    flex-direction: row;
+  }
+  .extraStylesHomeSidebarListItem {
+    font-size: 3vw;
+  }
+  .extraStylesHomeSidebarTitle {
+    display: none;
+  }
+  .extraStylesHomeSidebarTitle + img {
+    width: 34vw;
+    height: 34vw;
+    margin-bottom: 0rem;
+  }
 }

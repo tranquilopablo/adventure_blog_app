@@ -2,11 +2,11 @@ import React from 'react';
 import css from './Post.module.css';
 import { Link } from 'react-router-dom';
 
-const Post = ({ post }) => {
+const Post = ({ post, extraStylesHome }) => {
   const picturePath = 'http://localhost:5000/images/';
 
   return (
-    <div className={css.post}>
+    <div className={css.post }>
       {post.photo && (
         <Link className="link" to={`/post/${post._id}`}>
           <img

@@ -7,7 +7,7 @@ const SinglePost = () => {
   return (
     <div className={css.single}>
       <OnePost/>
-      <Sidebar/>
+      <Sidebar extrastyles/>
     </div>
   )
 };
