@@ -1,17 +1,43 @@
 const router = require('express').Router();
 // const User = require("../models/User");
 const Post = require('../models/Post');
+const fileUpload = require('../middleware/file-upload');
+
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+
+const bucketName = process.env.BUCKET_NAME;
+const bucketRegion = process.env.BUCKET_REGION;
+const accessKey = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: accessKey,
+    secretAccessKey: secretAccessKey,
+  },
+  region: bucketRegion,
+});
 
 // CREATE NEW POST
 
-router.post('/', async (req, res) => {
-  console.log(req.body);
+router.post('/', fileUpload.single('file'), async (req, res) => {
+
+  const dateNow = Date.now()
+
+  const params = {
+    Bucket: bucketName,
+    Key: `${dateNow}${req.file.originalname}`,
+    Body: req.file.buffer,
+    ContentType: req.file.mimetype,
+  };
+  const command = new PutObjectCommand(params);
+  await s3.send(command);
+  const workingUrl = `https://${bucketName}.s3.${bucketRegion}.amazonaws.com/${dateNow}${req.file.originalname}`;
 
   const newPost = new Post(req.body);
+  newPost.photo = workingUrl;
   try {
     const savedPost = await newPost.save();
-     
-    console.log(savedPost);
 
     res.status(200).json(savedPost);
   } catch (err) {
@@ -30,7 +56,7 @@ router.put('/:id', async (req, res) => {
           {
             $set: req.body,
           },
-          { new: true }            // new: true - returns document after update was applied
+          { new: true } // new: true - returns document after update was applied
         );
         res.status(200).json(updatedPost);
       } catch (err) {
@@ -82,6 +108,8 @@ router.get('/', async (req, res) => {
 
   const username = req.query.uzytkownik;
   const catName = req.query.kategoria;
+  console.log(username);
+  
 
   try {
     let posts;

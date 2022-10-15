@@ -7,7 +7,7 @@ import { Fade as Hamburger } from 'hamburger-react';
 
 const Topbar = () => {
   const { user, dispatch } = useContext(Context);
-  const picturePath = 'http://localhost:5000/images/';
+  // const picturePath = 'http://localhost:5000/images/';
   const [isOpen, setOpen] = useState(false);
 
   const openSideMenu = () => {
@@ -49,7 +49,7 @@ const Topbar = () => {
               <Link to="/ustawienia">
                 <img
                   className={css.avatar}
-                  src={picturePath + user.profilePic}
+                  src={user.profilePic}
                   // src="https://images.unsplash.com/photo-1514929781313-76fcbb2136b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
                   alt=""
                 />

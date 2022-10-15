@@ -9,7 +9,6 @@ import SinglePost from './pages/SinglePost';
 import { Context } from './context/Context';
 
 const App = () => {
-  // const user = false;
   const { user } = useContext(Context);
 
   return (

@@ -19,7 +19,10 @@ const OnePost = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const path = location.pathname.split('/')[2];
-  const picturePath = 'http://localhost:5000/images/';
+  // const picturePath = 'http://localhost:5000/images/';
+
+  
+  const date = new Date(Number(post.postDate)).toLocaleDateString()
 
   useEffect(() => {
     const getPost = async () => {
@@ -93,7 +96,7 @@ const OnePost = () => {
         {post.photo && (
           <img
             className={css.onePostImg}
-            src={picturePath + post.photo}
+            src={ post.photo}
             alt=""
           />
         )}
@@ -130,7 +133,7 @@ const OnePost = () => {
               <b className={css.onePostAuthor}>{post.username}</b>
             </Link>
           </span>
-          <span>{post.postDate}</span>
+          <span>{date}</span>
         </div>
         {editMode ? (
           <textarea

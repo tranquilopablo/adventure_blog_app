@@ -2,15 +2,48 @@ const router = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const Post = require('../models/Post');
+const fileUpload = require('../middleware/file-upload');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { v4: uuidv4 } = require('uuid');
+
+const bucketName = process.env.BUCKET_NAME;
+const bucketRegion = process.env.BUCKET_REGION;
+const accessKey = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: accessKey,
+    secretAccessKey: secretAccessKey,
+  },
+  region: bucketRegion,
+});
+const randomId = uuidv4();
 
 // UPDATE
-router.put('/:id', async (req, res) => {
+router.put('/:id', fileUpload.single('file'), async (req, res) => {
   if (req.body.userId === req.params.id) {
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
 
       req.body.password = await bcrypt.hash(req.body.password, salt);
     }
+
+    let workingUrl;
+    if (req.file) {
+      const params = {
+        Bucket: bucketName,
+        Key: `${req.file.originalname}${randomId}`,
+        Body: req.file.buffer,
+        ContentType: req.file.mimetype,
+      };
+      const command = new PutObjectCommand(params);
+      await s3.send(command);
+      workingUrl = `https://${bucketName}.s3.${bucketRegion}.amazonaws.com/${req.file.originalname}${randomId}`;
+    }
+
+    req.body.profilePic = workingUrl;
+
     try {
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,

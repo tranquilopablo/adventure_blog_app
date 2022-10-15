@@ -3,18 +3,14 @@ import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
 import css from './MobileNav.module.css';
 
-const MobileNav = (props) => {
+const MobileNav = ({ closeSideMenu }) => {
   const { user, dispatch } = useContext(Context);
   const picturePath = 'http://localhost:5000/images/';
 
-
-  const logout = ()=> {
-    props.closeSideMenu()
+  const logout = () => {
+    closeSideMenu();
     dispatch({ type: 'LOGOUT' });
-
-  }
-
-  
+  };
 
   return (
     <React.Fragment>
@@ -22,13 +18,13 @@ const MobileNav = (props) => {
       <div className={css.topbar}>
         <ul className={css['list-wrapper']}>
           <li className={css['list-item']}>
-            <Link className="link" to="/" onClick={props.closeSideMenu}>
+            <Link className="link" to="/" onClick={closeSideMenu}>
               STRONA GŁÓWNA
             </Link>
           </li>
           {user && (
             <li className={css['list-item']}>
-              <Link className="link" to="/napisz" onClick={props.closeSideMenu}>
+              <Link className="link" to="/napisz" onClick={closeSideMenu}>
                 NAPISZ
               </Link>
             </li>
@@ -36,7 +32,7 @@ const MobileNav = (props) => {
 
           {user && (
             <div className={`${css['img-box']}`}>
-              <Link to="/ustawienia" onClick={props.closeSideMenu}>
+              <Link to="/ustawienia" onClick={closeSideMenu}>
                 <img
                   className={css.avatar}
                   src={picturePath + user.profilePic}
@@ -52,7 +48,7 @@ const MobileNav = (props) => {
             </p>
           ) : (
             <p className={css.login}>
-              <Link className="link" to="/login" onClick={props.closeSideMenu}>
+              <Link className="link" to="/login" onClick={closeSideMenu}>
                 LOGIN
               </Link>
             </p>

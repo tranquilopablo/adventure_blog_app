@@ -2,18 +2,18 @@ import React from 'react';
 import css from './Post.module.css';
 import { Link } from 'react-router-dom';
 
-const Post = ({ post, extraStylesHome }) => {
-  const picturePath = 'http://localhost:5000/images/';
+const Post = ({ post }) => {
+  // const picturePath = 'http://localhost:5000/images/';
+ 
+
+  const date = new Date(Number(post.postDate)).toLocaleDateString()
+  
 
   return (
-    <div className={css.post }>
+    <div className={css.post}>
       {post.photo && (
         <Link className="link" to={`/post/${post._id}`}>
-          <img
-            src={picturePath + post.photo}
-            alt={post.title}
-            className={css.postImg}
-          />
+          <img src={post.photo} alt={post.title} className={css.postImg} />
         </Link>
       )}
       <div className={css.postInfo}>
@@ -26,7 +26,7 @@ const Post = ({ post, extraStylesHome }) => {
           <Link className="link" to={`/?uzytkownik=${post.username}`}>
             <span className={css.postDate}>{post.username}</span>
           </Link>
-          <span className={css.postDate}>{post.postDate}</span>
+          <span className={css.postDate}>{date}</span>
         </div>
       </div>
       <p className={css.postDesc}>{post.description}</p>

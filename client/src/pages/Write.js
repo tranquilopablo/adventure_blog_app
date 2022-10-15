@@ -20,24 +20,24 @@ const Write = () => {
       title,
       description,
       category,
-      postDate: new Date().toLocaleDateString(),
+      postDate: new Date().getTime()
     };
 
+    let data;
     if (file) {
-      const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append('name', filename);
+      data = new FormData();
       data.append('file', file);
-      newPost.photo = filename;
-      try {
-        await axios.post('/upload', data);
-      } catch (err) {
-        console.log(err);
-      }
     }
 
+    data.append('username', newPost.username);
+    data.append('title', newPost.title);
+    data.append('description', newPost.description);
+    data.append('category', newPost.category);
+    data.append('postDate', newPost.postDate);
+
+
     try {
-      const res = await axios.post('/posts', newPost);
+      const res = await axios.post('/posts', data);
 
       history.push('/post/' + res.data._id);
     } catch (err) {

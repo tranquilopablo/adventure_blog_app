@@ -14,7 +14,7 @@ const Settings = () => {
   const [success, setSuccess] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const picturePath = 'http://localhost:5000/images/';
+  // const picturePath = 'http://localhost:5000/images/';
 
   const openConfirmationDialog = () => {
     setIsOpenModal(true);
@@ -30,29 +30,31 @@ const Settings = () => {
       email,
     };
 
+    const data = new FormData();
     if (file) {
-      const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append('name', filename);
+      // const filename = Date.now() + file.name;
+      // data.append('name', filename);
       data.append('file', file);
-      updatedUser.profilePic = filename;
+      // updatedUser.profilePic = filename;
 
-      try {
-        await axios.post('/upload', data);
-      } catch (err) {
-        console.log(err);
-      }
+      //   try {
+      //     await axios.post('/upload', data);
+      //   } catch (err) {
+      //   }
     }
 
+    data.append('userId', updatedUser.userId);
+    data.append('username', updatedUser.username);
+    data.append('password', updatedUser.password);
+    data.append('email', updatedUser.email);
+
     try {
-      const res = await axios.put('/users/' + user._id, updatedUser);
+      const res = await axios.put('/users/' + user._id, data);
       setSuccess(true);
-      console.log(res.data);
 
       dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
     } catch (err) {
       dispatch({ type: 'UPDATE_FAILURE' });
-      console.log(err);
     }
   };
 
@@ -66,11 +68,7 @@ const Settings = () => {
           dispatch({ type: 'LOGOUT' });
         }, 500);
       }
-      console.log(res.data);
-      console.log('usunales konto!');
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     setIsOpenModal(false);
   };
 
@@ -101,9 +99,7 @@ const Settings = () => {
           <label>Zdjęcie profilowe</label>
           <div className={css.settingsPP}>
             <img
-              src={
-                file ? URL.createObjectURL(file) : picturePath + user.profilePic
-              }
+              src={file ? URL.createObjectURL(file) : user.profilePic}
               alt="me"
             />
             {/* <img
@@ -161,7 +157,7 @@ const Settings = () => {
           )}
         </form>
       </div>
-      <Sidebar extrastyles/>
+      <Sidebar extrastyles />
     </div>
   );
 };

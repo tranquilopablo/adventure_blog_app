@@ -47,22 +47,26 @@ const Login = () => {
           password: passwordRef.current.value,
           email: emailValue,
         };
-
+         
+        let data
         if (imageInput) {
-          const data = new FormData();
-          const fileName = Date.now() + imageInput.name;
-          data.append('name', fileName);
+           data = new FormData();
+          // const fileName = Date.now() + imageInput.name;
+          // data.append('name', fileName);
           data.append('file', imageInput);
-          newUser.image = fileName;
+          // newUser.image = fileName;
 
-          try {
-            await axios.post('/upload', data);
-          } catch (err) {
-            console.log(err);
-          }
+          // try {
+          //   await axios.post('/upload', data);
+          // } catch (err) {
+          //   console.log(err);
+          // }
         }
+        data.append("username", newUser.username)
+        data.append("password", newUser.password)
+        data.append("email", newUser.email)
         try {
-          const res = await axios.post('/auth/register', newUser);
+          const res = await axios.post('/auth/register', data);
 
           dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
 
