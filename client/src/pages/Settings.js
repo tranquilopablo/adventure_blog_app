@@ -49,7 +49,7 @@ const Settings = () => {
     data.append('email', updatedUser.email);
 
     try {
-      const res = await axios.put('/users/' + user._id, data);
+      const res = await axios.put(process.env.REACT_APP_BACKEND_URL + `/users/${user._id}`, data);
       setSuccess(true);
 
       dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
@@ -60,7 +60,7 @@ const Settings = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const res = await axios.delete('/users/' + user._id, {
+      const res = await axios.delete(process.env.REACT_APP_BACKEND_URL + `/users/${user._id}`, {
         data: { userId: user._id },
       });
       if (res.data) {

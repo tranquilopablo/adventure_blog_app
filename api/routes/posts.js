@@ -21,8 +21,7 @@ const s3 = new S3Client({
 // CREATE NEW POST
 
 router.post('/', fileUpload.single('file'), async (req, res) => {
-
-  const dateNow = Date.now()
+  const dateNow = Date.now();
 
   const params = {
     Bucket: bucketName,
@@ -108,8 +107,6 @@ router.get('/', async (req, res) => {
 
   const username = req.query.uzytkownik;
   const catName = req.query.kategoria;
-  console.log(username);
-  
 
   try {
     let posts;

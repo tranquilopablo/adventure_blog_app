@@ -64,14 +64,13 @@ router.put('/:id', fileUpload.single('file'), async (req, res) => {
 // DELETE
 
 router.delete('/:id', async (req, res) => {
-  console.log(req.body.userId);
-  console.log(req.params.id);
+  
 
   if (req.body.userId === req.params.id) {
     try {
       const user = await User.findById(req.params.id);
       try {
-        await Post.deleteMany({ username: user.username });
+        await Post.deleteMany({ username: user.username });// not best way coz when we change username and afterwards want delete account those posts still are kept in mongoDb. Better way is to make connection among models and use populate method. deletemany is ok when we want delete something that has no impact to other data in mongodb
         await User.findByIdAndDelete(req.params.id);
 
         res.status(200).json('User has been delated...');

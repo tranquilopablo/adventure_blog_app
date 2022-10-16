@@ -37,7 +37,7 @@ const Write = () => {
 
 
     try {
-      const res = await axios.post('/posts', data);
+      const res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/posts`, data);
 
       history.push('/post/' + res.data._id);
     } catch (err) {

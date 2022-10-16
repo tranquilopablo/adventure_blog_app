@@ -23,8 +23,7 @@ const randomId = uuidv4();
 // REGISTER
 
 router.post('/register', fileUpload.single('file'), async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
+  
 
   try {
     const salt = await bcrypt.genSalt(10);

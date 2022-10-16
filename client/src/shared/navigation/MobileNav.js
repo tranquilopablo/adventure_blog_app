@@ -5,7 +5,7 @@ import css from './MobileNav.module.css';
 
 const MobileNav = ({ closeSideMenu }) => {
   const { user, dispatch } = useContext(Context);
-  const picturePath = 'http://localhost:5000/images/';
+  // const picturePath = 'http://localhost:5000/images/';
 
   const logout = () => {
     closeSideMenu();
@@ -35,7 +35,7 @@ const MobileNav = ({ closeSideMenu }) => {
               <Link to="/ustawienia" onClick={closeSideMenu}>
                 <img
                   className={css.avatar}
-                  src={picturePath + user.profilePic}
+                  src={user.profilePic}
                   alt="my avatar"
                 />
               </Link>

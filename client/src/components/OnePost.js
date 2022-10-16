@@ -26,7 +26,7 @@ const OnePost = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get('/posts/' + path);
+      const res = await axios.get(process.env.REACT_APP_BACKEND_URL + `/posts/${path}`);
       setPost(res.data);
       setTitle(res.data.title);
       setDescription(res.data.description);
@@ -50,7 +50,7 @@ const OnePost = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete('/posts/' + path, {
+      await axios.delete(process.env.REACT_APP_BACKEND_URL  + `/posts/${path}`, {
         data: {
           username: user.username,
         },
@@ -64,7 +64,7 @@ const OnePost = () => {
   const handleEditedPost = async (e) => {
     console.log('edytowane');
     try {
-      const res = await axios.put('/posts/' + path, {
+      const res = await axios.put(process.env.REACT_APP_BACKEND_URL + `/posts/ ${path}`, {
         username: user.username,
         title,
         description,

@@ -25,7 +25,7 @@ const Login = () => {
       // LOGIN
 
       try {
-        const res = await axios.post('/auth/login', {
+        const res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/auth/login`, {
           username: userRef.current.value,
           password: passwordRef.current.value,
         });
@@ -66,7 +66,7 @@ const Login = () => {
         data.append("password", newUser.password)
         data.append("email", newUser.email)
         try {
-          const res = await axios.post('/auth/register', data);
+          const res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/auth/register`, data);
 
           dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
 
