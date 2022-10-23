@@ -1,11 +1,13 @@
 # adventure-blog-app
 
 ## Demo
-As the backend is hosted on a free Heroku account, the application starts usually a few seconds late.
+As the application is on a free Heroku account, it usually takes a few seconds to wake up.
 
 [Live demo](https://adventure-blog-app.web.app/)
 
 ## Credentials
+- Pawel
+- qwerty12
 
 
 ## Description
