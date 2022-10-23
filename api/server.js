@@ -17,7 +17,10 @@ app.use('/images', express.static(path.join(__dirname, '/images')));
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  // .connect(process.env.MONGO_URL)
+  .connect(
+    'mongodb+srv://blunt17:bundy17@pawel.vs6xb.mongodb.net/blog?retryWrites=true&w=majority'
+  )
   .then(() => {
     app.listen(process.env.PORT || 5000);
   })
@@ -33,7 +36,10 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PATCH, DELETE, PUT'
+  );
   next();
 });
 

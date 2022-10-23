@@ -21,12 +21,13 @@ const OnePost = () => {
   const path = location.pathname.split('/')[2];
   // const picturePath = 'http://localhost:5000/images/';
 
-  
-  const date = new Date(Number(post.postDate)).toLocaleDateString()
+  const date = new Date(Number(post.postDate)).toLocaleDateString();
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get(process.env.REACT_APP_BACKEND_URL + `/posts/${path}`);
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/posts/${path}`
+      );
       setPost(res.data);
       setTitle(res.data.title);
       setDescription(res.data.description);
@@ -50,7 +51,7 @@ const OnePost = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(process.env.REACT_APP_BACKEND_URL  + `/posts/${path}`, {
+      await axios.delete(process.env.REACT_APP_BACKEND_URL + `/posts/${path}`, {
         data: {
           username: user.username,
         },
@@ -64,12 +65,15 @@ const OnePost = () => {
   const handleEditedPost = async (e) => {
     console.log('edytowane');
     try {
-      const res = await axios.put(process.env.REACT_APP_BACKEND_URL + `/posts/ ${path}`, {
-        username: user.username,
-        title,
-        description,
-        category,
-      });
+      const res = await axios.put(
+        process.env.REACT_APP_BACKEND_URL + `/posts/${path}`,
+        {
+          username: user.username,
+          title,
+          description,
+          category,
+        }
+      );
 
       (() => {
         if (res.data) {
@@ -94,11 +98,7 @@ const OnePost = () => {
       )}{' '}
       <div className={css.onePostWrapper}>
         {post.photo && (
-          <img
-            className={css.onePostImg}
-            src={ post.photo}
-            alt=""
-          />
+          <img className={css.onePostImg} src={post.photo} alt="" />
         )}
         {editMode ? (
           <input
