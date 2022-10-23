@@ -17,10 +17,7 @@ app.use('/images', express.static(path.join(__dirname, '/images')));
 dotenv.config();
 
 mongoose
-  // .connect(process.env.MONGO_URL)
-  .connect(
-    'mongodb+srv://blunt17:bundy17@pawel.vs6xb.mongodb.net/blog?retryWrites=true&w=majority'
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => {
     app.listen(process.env.PORT || 5000);
   })
