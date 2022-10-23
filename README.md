@@ -15,6 +15,6 @@ As the backend is hosted on a free Heroku account, the application starts usuall
 
 **Client:** React, CSS Modules, React Context, Firebase
 
-**Server:** Node, Express,MongoDb, AWS S3, Heroku 
+**Server:** Node, Express,MongoDb, AWS S3, REST API, Heroku 
 
 ## Lessons Learned
