@@ -15,9 +15,9 @@ A blog written in React, the user can add and edit posts after logging in, as we
 
 ## 🛠 Tech Stack
 
-**Client:** React, CSS Modules, React Context, Firebase
+**Client:** React, CSS Modules, React Context + useReducer, Firebase
 
 **Server:** Node, Express,MongoDb, AWS S3, REST API, Heroku 
 
 ## Lessons Learned
-When writing the blog, I mainly focused on implementing routing in React, using React Context to handle the state of the application, and the ability to add images and handle this on the frontend as well as the server side. Also, just writing the server using Express.js and storing the data in MongoDb gave me practice so that i can now write a full-stack application. 
+When writing the blog, I mainly focused on implementing routing in React, using React Context with useReducer to handle the state of the application, and the ability to add images and handle this on the frontend as well as the server side. Also, just writing the server using Express.js and storing the data in MongoDb gave me practice so that i can now write a full-stack application. 
