@@ -14,15 +14,12 @@ const Settings = () => {
   const [success, setSuccess] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  // const picturePath = 'http://localhost:5000/images/';
-
   const openConfirmationDialog = () => {
     setIsOpenModal(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch({ type: 'UPDATE_START' });
     const updatedUser = {
       userId: user._id,
       username,
@@ -32,15 +29,7 @@ const Settings = () => {
 
     const data = new FormData();
     if (file) {
-      // const filename = Date.now() + file.name;
-      // data.append('name', filename);
       data.append('file', file);
-      // updatedUser.profilePic = filename;
-
-      //   try {
-      //     await axios.post('/upload', data);
-      //   } catch (err) {
-      //   }
     }
 
     data.append('userId', updatedUser.userId);
@@ -51,7 +40,6 @@ const Settings = () => {
     try {
       const res = await axios.put(process.env.REACT_APP_BACKEND_URL + `/users/${user._id}`, data);
       setSuccess(true);
-
       dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
     } catch (err) {
       dispatch({ type: 'UPDATE_FAILURE' });
@@ -71,10 +59,7 @@ const Settings = () => {
     } catch (err) {}
     setIsOpenModal(false);
   };
-
-  // const defaultSrc =
-  //   'https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500';
-
+  
   return (
     <div className={css.settings}>
       {isOpenModal && (
@@ -102,10 +87,6 @@ const Settings = () => {
               src={file ? URL.createObjectURL(file) : user.profilePic}
               alt="me"
             />
-            {/* <img
-              src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-            /> */}
             <label htmlFor="fileInput">
               <i
                 className={`${css.settingsPPIcon} ${'far fa-user-circle'} `}

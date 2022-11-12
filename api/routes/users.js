@@ -25,10 +25,8 @@ router.put('/:id', fileUpload.single('file'), async (req, res) => {
   if (req.body.userId === req.params.id) {
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
-
       req.body.password = await bcrypt.hash(req.body.password, salt);
     }
-
     let workingUrl;
     if (req.file) {
       const params = {
@@ -41,16 +39,14 @@ router.put('/:id', fileUpload.single('file'), async (req, res) => {
       await s3.send(command);
       workingUrl = `https://${bucketName}.s3.${bucketRegion}.amazonaws.com/${req.file.originalname}${randomId}`;
     }
-
     req.body.profilePic = workingUrl;
-
     try {
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,
         },
-        { new: true } // adding new:true because in postman during updating files havent changed, only in mongodb
+        { new: true } 
       );
       res.status(200).json(updatedUser);
     } catch (err) {
@@ -62,17 +58,13 @@ router.put('/:id', fileUpload.single('file'), async (req, res) => {
 });
 
 // DELETE
-
 router.delete('/:id', async (req, res) => {
-  
-
   if (req.body.userId === req.params.id) {
     try {
       const user = await User.findById(req.params.id);
       try {
-        await Post.deleteMany({ username: user.username });// not best way coz when we change username and afterwards want delete account those posts still are kept in mongoDb. Better way is to make connection among models and use populate method. deletemany is ok when we want delete something that has no impact to other data in mongodb
+        await Post.deleteMany({ username: user.username });
         await User.findByIdAndDelete(req.params.id);
-
         res.status(200).json('User has been delated...');
       } catch (err) {
         res.status(500).json(err);
@@ -86,7 +78,6 @@ router.delete('/:id', async (req, res) => {
 });
 
 // GET USER
-
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

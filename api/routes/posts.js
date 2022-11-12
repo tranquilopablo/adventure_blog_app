@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const User = require("../models/User");
 const Post = require('../models/Post');
 const fileUpload = require('../middleware/file-upload');
 
@@ -19,7 +18,6 @@ const s3 = new S3Client({
 });
 
 // CREATE NEW POST
-
 router.post('/', fileUpload.single('file'), async (req, res) => {
   const dateNow = Date.now();
 
@@ -32,12 +30,10 @@ router.post('/', fileUpload.single('file'), async (req, res) => {
   const command = new PutObjectCommand(params);
   await s3.send(command);
   const workingUrl = `https://${bucketName}.s3.${bucketRegion}.amazonaws.com/${dateNow}${req.file.originalname}`;
-
   const newPost = new Post(req.body);
   newPost.photo = workingUrl;
   try {
     const savedPost = await newPost.save();
-
     res.status(200).json(savedPost);
   } catch (err) {
     res.status(500).json(err);
@@ -55,7 +51,7 @@ router.put('/:id', async (req, res) => {
           {
             $set: req.body,
           },
-          { new: true } // new: true - returns document after update was applied
+          { new: true } 
         );
         res.status(200).json(updatedPost);
       } catch (err) {
@@ -70,7 +66,6 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE
-
 router.delete('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -101,13 +96,8 @@ router.get('/:id', async (req, res) => {
 
 // GET ALL POSTS
 router.get('/', async (req, res) => {
-  // "/?uzytkownik=jane"
-  // "/?kategoria=Azja"
-  // "api/posts?uzytkownik=jane"
-
   const username = req.query.uzytkownik;
   const catName = req.query.kategoria;
-
   try {
     let posts;
     if (username) {

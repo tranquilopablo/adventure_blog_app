@@ -15,23 +15,18 @@ const Login = () => {
   const history = useHistory();
   const [err, setErr] = useState(false);
 
-  // const isFetching = false;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: 'LOGIN_START' });
 
     if (loginMode) {
       // LOGIN
-
       try {
         const res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/auth/login`, {
           username: userRef.current.value,
           password: passwordRef.current.value,
         });
-
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-
         res.data && history.push('/');
       } catch (err) {
         setErr(true);
@@ -40,36 +35,23 @@ const Login = () => {
       }
     } else {
       // REGISTER
-
       try {
         const newUser = {
           username: userRef.current.value,
           password: passwordRef.current.value,
           email: emailValue,
-        };
-         
+        }; 
         let data
         if (imageInput) {
            data = new FormData();
-          // const fileName = Date.now() + imageInput.name;
-          // data.append('name', fileName);
           data.append('file', imageInput);
-          // newUser.image = fileName;
-
-          // try {
-          //   await axios.post('/upload', data);
-          // } catch (err) {
-          //   console.log(err);
-          // }
         }
         data.append("username", newUser.username)
         data.append("password", newUser.password)
         data.append("email", newUser.email)
         try {
           const res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/auth/register`, data);
-
           dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-
           res.data && history.push('/');
         } catch (err) {
           dispatch({ type: 'LOGIN_FAILURE' });

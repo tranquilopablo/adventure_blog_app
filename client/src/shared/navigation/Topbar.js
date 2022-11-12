@@ -12,7 +12,6 @@ const Topbar = () => {
 
   const openSideMenu = () => {
     setOpen((prevState) => !prevState);
-
     if (!isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -20,11 +19,9 @@ const Topbar = () => {
     }
   };
  
-
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
   };
-
   return (
     <React.Fragment>
       {isOpen && <MobileNav closeSideMenu={openSideMenu} />}
@@ -50,7 +47,6 @@ const Topbar = () => {
                 <img
                   className={css.avatar}
                   src={user.profilePic}
-                  // src="https://images.unsplash.com/photo-1514929781313-76fcbb2136b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
                   alt=""
                 />
               </Link>

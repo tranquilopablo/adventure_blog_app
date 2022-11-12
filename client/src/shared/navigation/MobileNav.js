@@ -5,13 +5,11 @@ import css from './MobileNav.module.css';
 
 const MobileNav = ({ closeSideMenu }) => {
   const { user, dispatch } = useContext(Context);
-  // const picturePath = 'http://localhost:5000/images/';
 
   const logout = () => {
     closeSideMenu();
     dispatch({ type: 'LOGOUT' });
   };
-
   return (
     <React.Fragment>
       <div className={css.backdrop}></div>
@@ -29,7 +27,6 @@ const MobileNav = ({ closeSideMenu }) => {
               </Link>
             </li>
           )}
-
           {user && (
             <div className={`${css['img-box']}`}>
               <Link to="/ustawienia" onClick={closeSideMenu}>
@@ -41,7 +38,6 @@ const MobileNav = ({ closeSideMenu }) => {
               </Link>
             </div>
           )}
-
           {user ? (
             <p className={css.login} onClick={logout}>
               WYLOGUJ

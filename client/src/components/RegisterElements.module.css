@@ -4,7 +4,6 @@
   align-items: center;
   margin-top: 10px;
 }
-
 .settingsPP > img {
   height: 5vw;
   width: 5vw;
@@ -26,16 +25,13 @@
   cursor: pointer;
   font-size: 2vw;
 }
-
-/* end profile picture styles */
-
+/* end of profile picture styles */
 .loginInput {
   padding: 10px;
   background-color: white;
   border: none;
   border-radius: 10px;
 }
-
 .loginInput:focus {
   outline: none;
 }
@@ -51,7 +47,6 @@
     width: 7vw;
   }
 }
-
 @media (max-width: 768px) {
   .settingsPPIcon {
     width: 9vw;

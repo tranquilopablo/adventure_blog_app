@@ -1,25 +1,22 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
-
 html {
   font-size: 62.5%;
 }
-
 body {
   width: 100vw;
   background: #fafafa;
   margin: 0 auto;
  overflow-x: hidden;
 }
-
 .center {
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
 }
-
 .link {
   text-decoration: none;
   color: inherit;

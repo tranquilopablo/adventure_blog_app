@@ -2,10 +2,8 @@
     display: flex;
     margin-top: 6vw;
 }
-
 @media (max-width: 768px) {
     .single{
         margin: 8vw auto 2vw auto
-
     }
   }

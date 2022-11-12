@@ -3,7 +3,7 @@ import css from './RegisterElements.module.css';
 
 const RegisterElements = (props) => {
   const [file, setFile] = useState(null);
- const setImageInput = props.setImageInput
+ const setImageInput = props.setImageInput;
 
   useEffect(() => {
     setImageInput(file);

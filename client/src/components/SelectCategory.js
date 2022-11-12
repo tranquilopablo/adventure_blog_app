@@ -2,8 +2,6 @@ import React from 'react';
 import css from './SelectCategory.module.css';
 
 const SelectCategory = (props) => {
-  // const [category, setCategory] = useState('Europa');
-
   const categories = [
     'Azja',
     'Europa',

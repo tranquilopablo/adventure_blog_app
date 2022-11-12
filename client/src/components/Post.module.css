@@ -4,20 +4,17 @@
   display: flex;
   flex-direction: column;
 }
-
 .postImg {
   width: 100%;
   height: 27rem;
   object-fit: cover;
   border-radius: 7px;
 }
-
 .postInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .postCat {
   font-family: 'Varela Round', Arial, Helvetica, sans-serif;
   font-size: 1.1rem;
@@ -28,10 +25,8 @@
   margin-right: 10px;
   margin-bottom: 8px;
   margin-left: 10px;
-  /* cursor: pointer; */
   align-self: flex-start;
 }
-
 .postTitle {
   font-family: 'Josefin Sans', Arial, Helvetica, sans-serif;
   text-decoration: none;
@@ -47,7 +42,6 @@
   justify-content: space-between;
   margin-top: 12px;
 }
-
 .postDate {
   font-family: 'Lora', serif;
   font-style: italic;
@@ -55,7 +49,6 @@
   font-weight: 400;
   color: #999;
 }
-
 .postDesc {
   font-family: 'Varela Round', Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -63,7 +56,6 @@
   line-height: 2.4rem;
   color: #444444;
   margin-top: 15px;
-  /* that below is to make text description only 4 lines and to make it end with a dots  */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -74,6 +66,5 @@
   .post{
     width: 93%;
     margin: 0 auto 50px auto;
-
   }
 }

@@ -3,12 +3,8 @@ import css from './Post.module.css';
 import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
-  // const picturePath = 'http://localhost:5000/images/';
- 
-
   const date = new Date(Number(post.postDate)).toLocaleDateString()
   
-
   return (
     <div className={css.post}>
       {post.photo && (

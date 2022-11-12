@@ -2,7 +2,6 @@
   padding-top: 6vw;
   overflow-x: hidden;
 }
-
 .writeImg {
   margin-left: 150px;
   width: 70vw;
@@ -10,7 +9,6 @@
   border-radius: 10px;
   object-fit: cover;
 }
-
 .writeForm {
   position: relative;
 }
@@ -19,7 +17,6 @@
   display: flex;
   align-items: center;
 }
-
 .fileIcon {
   width: 4vw;
   height: 4vw;
@@ -32,7 +29,6 @@
   align-items: center;
   cursor: pointer;
 }
-
 .writeInput {
   font-size: 3rem;
   border: none;
@@ -40,11 +36,9 @@
   width: 70vw;
   background-color: transparent;
 }
-
 .writeInput:focus {
   outline-style: none;
 }
-
 .writeText {
   width: 70vw;
   max-width: 70vw;
@@ -54,7 +48,6 @@
   background-color: #fff;
   margin-bottom: 20vw;
 }
-
 .writeSubmit {
   position: absolute;
   top: 18vw;
@@ -87,7 +80,6 @@
     width: 92vw;
     margin: 6vw auto 0 auto;
   }
-
   .writeImg {
     margin-left: 0;
     width: 92vw;
@@ -95,18 +87,15 @@
     border-radius: 10px;
     object-fit: cover;
   }
-
   .writeFormGroup {
     margin-left: 0;
   }
-
   .writeInput {
     font-size: 2.2rem;
     margin-top: 0;
     padding: 10px;
     width: 92vw;
   }
-
   .writeSubmit {
     top: 38vw;
     right: 10vw;
@@ -121,7 +110,6 @@
   .writeText {  
     margin-top: 24vw;
     max-width: none;
-
   }
 }
 

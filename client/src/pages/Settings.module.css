@@ -9,20 +9,17 @@
   font-family: 'Lora', Helvetica, sans-serif;
   letter-spacing: 0.2px;
 }
-
 .settingsTitle {
   width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .settingsTitleUpdate {
   font-size: 3rem;
   margin-bottom: 20px;
   color: lightcoral;
 }
-
 .settingsTitleDelete {
   color: red;
   font-size: 2rem;
@@ -34,13 +31,11 @@
   display: flex;
   flex-direction: column;
 }
-
 .settingsPP {
   display: flex;
   align-items: center;
   margin-top: 10px;
 }
-
 .settingsPP > img {
   height: 5vw;
   width: 5vw;
@@ -62,12 +57,10 @@
   cursor: pointer;
   font-size: 2vw;
 }
-
 .settingsForm > label {
   font-size: 2rem;
   margin-top: 20px;
 }
-
 .settingsForm > input {
   padding: 10px;
   width: 80%;
@@ -79,7 +72,6 @@
   border-bottom: 1px solid lightgray;
   background-color: transparent;
 }
-
 .settingsSubmitButton {
   align-self: center;
   border: none;
@@ -91,7 +83,6 @@
   cursor: pointer;
   letter-spacing: 1px;
 }
-
 .settingsSubmitButton:hover {
   background-color: rgb(1, 114, 114);
 }
@@ -104,15 +95,10 @@
   .settingsTitleUpdate {
     font-size: 2rem;
   }
-
   .settingsTitleDelete{
        align-self: flex-end;
     font-size: 1.5rem;
-
   }
-
- 
-  
   .settingsPP > img {
     height: 12vw;
     width: 12vw;

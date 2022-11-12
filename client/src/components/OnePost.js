@@ -17,10 +17,7 @@ const OnePost = () => {
   const [category, setCategory] = useState('');
   const history = useHistory();
   const [isOpenModal, setIsOpenModal] = useState(false);
-
   const path = location.pathname.split('/')[2];
-  // const picturePath = 'http://localhost:5000/images/';
-
   const date = new Date(Number(post.postDate)).toLocaleDateString();
 
   useEffect(() => {
@@ -35,19 +32,6 @@ const OnePost = () => {
     };
     getPost();
   }, [path]);
-
-  // const post = {
-  //   photo: `https://placeimg.com/640/48${Math.floor(
-  //     Math.random() * 10
-  //   )}/nature`,
-  //   title: 'To jest wyprawa w nieznane',
-  //   postDate: new Date().toLocaleDateString(),
-  //   _id: 'p1',
-  //   username: 'Pawel Zguda',
-  //   description:
-  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  //   category: 'Azja',
-  // };
 
   const handleDelete = async () => {
     try {
@@ -74,7 +58,6 @@ const OnePost = () => {
           category,
         }
       );
-
       (() => {
         if (res.data) {
           setEditMode(false);
@@ -95,7 +78,7 @@ const OnePost = () => {
           content="Potwierdzasz chęć usunięcia posta?"
           confirm={handleDelete}
         />
-      )}{' '}
+      )}
       <div className={css.onePostWrapper}>
         {post.photo && (
           <img className={css.onePostImg} src={post.photo} alt="" />
@@ -125,7 +108,6 @@ const OnePost = () => {
             )}
           </h1>
         )}
-
         <div className={css.onePostInfo}>
           <span className={css.onePostAuthor}>
             Autor:

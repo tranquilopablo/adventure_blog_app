@@ -35,10 +35,8 @@ const Write = () => {
     data.append('category', newPost.category);
     data.append('postDate', newPost.postDate);
 
-
     try {
       const res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/posts`, data);
-
       history.push('/post/' + res.data._id);
     } catch (err) {
       console.log(err);
@@ -49,7 +47,6 @@ const Write = () => {
     <div className={css.write}>
       {file && (
         <img
-          // src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           src={URL.createObjectURL(file)}
           alt=""
           className={css.writeImg}
